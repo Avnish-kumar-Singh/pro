@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Sharing Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-container">
+    <header class="site-header">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true">🍳</div>
+        <h1>Flavor Fusion</h1>
+      </div>
+      <p>Discover and share delicious recipes from our community</p>
+      <nav>
+        <a href="index.html" class="current-page">Home</a>
+        <span class="nav-divider">|</span>
+        <a href="submit.html">Submit Recipe</a>
+      </nav>
+    </header>
+
+    <div class="content-card">
+      <section class="hero">
+        <h2>All Recipes</h2>
+        <p>Browse our collection of home-cooked favorites, or add your own masterpiece!</p>
+        <div class="stats-bar" id="statsBar" hidden>
+          <div class="stat-item">
+            <span class="stat-number" id="statRecipes">0</span>
+            <span class="stat-label">Recipes</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" id="statIngredients">0</span>
+            <span class="stat-label">Ingredients</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number" id="statCommunity">1</span>
+            <span class="stat-label">Community</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="search-bar" id="searchBar" hidden>
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="search" id="searchInput" placeholder="Search recipes by name or ingredient..." aria-label="Search recipes">
+      </div>
+
+      <div id="recipes" class="recipe-grid">
+        <p class="loading">Loading recipes</p>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <p>&copy; 2025 Flavor Fusion. Made with love for food lovers everywhere.</p>
+    </footer>
+  </div>
+
+  <a href="submit.html" class="fab" title="Submit a recipe" aria-label="Submit a recipe">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+  </a>
+
+  <button class="fab fab-chat" id="aiChatBtn" title="Chat with Chef AI" aria-label="Open Chef AI Assistant">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </button>
+
+  <div class="fab-label" aria-hidden="true">
+    <span class="fab-label-text">ASK to AI</span>
+  </div>
+
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <div class="modal-overlay" id="recipeModal" hidden>
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+      <div class="modal-image" id="modalImage"></div>
+      <div class="modal-body">
+        <h2 id="modalTitle"></h2>
+        <div class="modal-section">
+          <h3>Ingredients</h3>
+          <div class="ingredient-tags" id="modalIngredients"></div>
+        </div>
+        <div class="modal-section">
+          <h3>Instructions</h3>
+          <p id="modalInstructions"></p>
+        </div>
+
+        <div class="ai-chat-section">
+          <div class="ai-chat-header">
+            <div class="ai-chat-title">
+              <span class="ai-avatar" aria-hidden="true">👨‍🍳</span>
+              <div>
+                <h3>Chef AI Assistant</h3>
+                <p class="ai-chat-subtitle">Ask anything about this recipe</p>
+              </div>
+            </div>
+            <span class="ai-badge" id="aiBadge">AI Ready</span>
+          </div>
+
+          <div class="chat-suggestions" id="chatSuggestions">
+            <button type="button" class="suggestion-chip" data-prompt="Explain this recipe step by step">Step by step</button>
+            <button type="button" class="suggestion-chip" data-prompt="What ingredient substitutions can I use?">Substitutions</button>
+            <button type="button" class="suggestion-chip" data-prompt="How long will this take to cook?">Cooking time</button>
+            <button type="button" class="suggestion-chip" data-prompt="Give me pro tips to make this better">Pro tips</button>
+          </div>
+
+          <div class="chat-messages" id="chatMessages" aria-live="polite"></div>
+
+          <form class="chat-input-form" id="chatForm">
+            <input type="text" id="chatInput" placeholder="Ask Chef AI about this recipe..." autocomplete="off" aria-label="Ask about this recipe">
+            <button type="submit" class="chat-send-btn" id="chatSendBtn" aria-label="Send message">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Standalone AI Chat Modal -->
+  <div class="modal-overlay" id="aiChatModal" hidden>
+    <div class="modal ai-chat-modal" role="dialog" aria-modal="true" aria-labelledby="aiChatTitle">
+      <button class="modal-close" id="aiChatClose" aria-label="Close">&times;</button>
+      <div class="modal-body">
+        <div class="ai-chat-header">
+          <div class="ai-chat-title">
+            <span class="ai-avatar" aria-hidden="true">👨‍🍳</span>
+            <div>
+              <h3 id="aiChatTitle">Chef AI Assistant</h3>
+              <p class="ai-chat-subtitle">Ask me anything about cooking!</p>
+            </div>
+          </div>
+          <span class="ai-badge" id="aiStandaloneBadge">Ready</span>
+        </div>
+
+        <div class="chat-suggestions" id="standaloneChatSuggestions">
+          <button type="button" class="suggestion-chip" data-prompt="What are some easy dinner ideas?">Dinner ideas</button>
+          <button type="button" class="suggestion-chip" data-prompt="How do I cook perfect pasta?">Cooking tips</button>
+          <button type="button" class="suggestion-chip" data-prompt="What can I cook with eggs and butter?">Recipe ideas</button>
+          <button type="button" class="suggestion-chip" data-prompt="Give me healthy cooking tips">Healthy cooking</button>
+        </div>
+
+        <div class="chat-messages" id="standaloneChatMessages" aria-live="polite"></div>
+
+        <form class="chat-input-form" id="standaloneForm">
+          <input type="text" id="standaloneInput" placeholder="Ask Chef AI anything..." autocomplete="off" aria-label="Ask Chef AI">
+          <button type="submit" class="chat-send-btn" id="standaloneSendBtn" aria-label="Send message">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="bg-decor" aria-hidden="true">
+    <span class="decor-item decor-1">🥗</span>
+    <span class="decor-item decor-2">🍕</span>
+    <span class="decor-item decor-3">🍰</span>
+    <span class="decor-item decor-4">🥘</span>
+    <span class="decor-item decor-5">🍜</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

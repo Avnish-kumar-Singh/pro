@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Share Your Culinary Masterpiece!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="submit-container">
+        <header class="site-header">
+            <div class="brand">
+                <div class="brand-icon" aria-hidden="true">🍳</div>
+                <h1>Share Your Delicious Recipe</h1>
+            </div>
+            <p>Help us grow our collection of amazing dishes!</p>
+            <nav>
+                <a href="index.html">Home</a>
+                <span class="nav-divider">|</span>
+                <a href="submit.html" class="current-page">Submit Recipe</a>
+            </nav>
+        </header>
+
+        <div class="content-card">
+            <main>
+                <form id="recipeForm" class="recipe-input-form">
+                    <div class="form-group">
+                        <label for="title">Recipe Title</label>
+                        <input type="text" id="title" placeholder="Enter the name of your dish" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingredients">Ingredients</label>
+                        <textarea id="ingredients" placeholder="List all ingredients, separated by commas" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="instructions">Instructions</label>
+                        <textarea id="instructions" placeholder="Provide clear, step-by-step instructions" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="image">Image URL <span style="font-weight:400;color:var(--color-text-muted)">(Optional)</span></label>
+                        <input type="text" id="image" placeholder="Paste a URL to an image of your dish">
+                        <small class="form-text">If you have a link to an image, you can include it here.</small>
+                        <div class="image-preview" id="imagePreview" hidden>
+                            <img id="previewImg" src="" alt="Recipe preview">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-button" id="submitBtn">
+                        <span class="btn-text">Submit Recipe</span>
+                        <span class="btn-loader" hidden></span>
+                    </button>
+                </form>
+            </main>
+
+            <footer>
+                <p>&copy; 2025 Flavor Fusion. We appreciate your contribution!</p>
+            </footer>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <div class="bg-decor" aria-hidden="true">
+        <span class="decor-item decor-1">🥗</span>
+        <span class="decor-item decor-2">🍕</span>
+        <span class="decor-item decor-3">🍰</span>
+        <span class="decor-item decor-4">🥘</span>
+        <span class="decor-item decor-5">🍜</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
