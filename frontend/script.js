@@ -2,7 +2,7 @@
 // and your deployed Render URL once you fill it in below.
 const backendURL = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
   ? 'http://localhost:5000'
-  : 'https://YOUR-RENDER-APP.onrender.com'; // <-- replace after deploying backend on Render
+  : 'https://recipe-sharing-backend-h6wn.onrender.com';
 
 let currentRecipe = null;
 let chatHistory = [];
