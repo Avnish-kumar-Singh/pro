@@ -16,7 +16,7 @@ A full-stack recipe-sharing platform with an LLM-powered cooking assistant that 
 </p>
 
 🌟 Project Overview
-
+ 
 The AI-Powered Recipe Sharing Platform combines a traditional recipe-sharing application with an LLM-powered conversational assistant.
 
 Users can create and browse recipes containing:
