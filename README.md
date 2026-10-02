@@ -469,7 +469,7 @@ Groq API key
 
 1️⃣ Clone the Repository
 
-git clone https://github.com/Avnish-kumar-Singh/recipe-sharing.git
+git clone https://github.com/Avnish-kumar-Singh/pro.git
 cd recipe-sharing
 
 Replace the repository URL with the current repository URL if the project is hosted under a different repository.
