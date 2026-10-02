@@ -860,7 +860,7 @@ This is especially useful when using free-tier AI providers where quotas and rat
                     │
                     ▼
              AI Response
-                    │
+                    │ 
                     ▼
             Continue Cooking
 
